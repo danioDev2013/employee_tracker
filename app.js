@@ -39,7 +39,6 @@ const start = () => {
             "View all Employees by Department",
             "View all Employees by Role",
             "View all Employees",
-            "View Manager",
             "Update Roles",
             "Update Department",
             "Update Employee Manager",
@@ -53,25 +52,22 @@ const start = () => {
         console.log(response);
         switch (response.action) {
             case 'Add New Department':
-                addNewDepartment();
+                addDepartment();
                 break;
             case 'Add New Role':
-                addNewRole();
+                getDept();
                 break;
             case 'Add New Employee':
-                addNewEmployee();
+                getRoles();
                 break;
             case 'View all Employees by Department':
-                viewEmployeeDep();
+                viewEmployeeDept();
                 break;
             case 'View all Employees by Role':
-                viewEmployeeRole();
+                viewEmployeeRoles();
                 break;
             case 'View all Employees':
                 viewEmployee();
-                break;
-            case 'View Manager':
-                viewManager();
                 break;
             case 'Update Roles':
                 updateRole();
@@ -80,7 +76,7 @@ const start = () => {
                 updateDept();
                 break;
             case 'Update Employee Manager':
-                updateEmpMan();
+                updateManager();
                 break;
             case 'Delete a Department':
                 deleteDept();
@@ -97,6 +93,18 @@ const start = () => {
                 break;
         }
     })
+}
+
+const getDept = () => {
+    
+}
+
+const getRoles = () => {
+
+}
+
+const addDepartment = () => {
+    
 }
 
 
