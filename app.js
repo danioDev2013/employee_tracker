@@ -1,8 +1,7 @@
 //require
 //const mysql = require('mysql');
 const inquirer = require('inquirer');
-const { ADDRGETNETWORKPARAMS } = require('node:dns');
-const { createConnection } = require('node:net');
+
 
 //connection information for the sql database
 //const connection = mysql.createConnection({
@@ -95,6 +94,8 @@ const start = () => {
     })
 }
 
+
+
 const getDept = () => {
     
 }
@@ -107,19 +108,47 @@ const addDepartment = () => {
     
 }
 
+const viewEmployeeDept = () => {
+
+}
+
+const viewEmployeeRoles = () => {
+
+}
+
+const viewEmployee = () => {
+    
+}
+
+const updateRole = () => {
+    
+}
+
+const updateDept = () => {
+    
+}
+
+const updateManager = () => {
+    
+}
+
+const deleteDept = () => {
+    
+}
+
+const deleteEmployee = () => {
+    
+}
+
+const deleteEmployee = () => {
+    
+}
+
+const deleteRole = () => {
+
+}
 
 init();
-//functions
-//prompts users
-//add employees, departments, rows
-//view info
-//update
-
-//bonus
-//update manager
-//view manager
-//delete departments
-//view utilized budget
 
 // connect to the mysql server and sql database
 //connection.connect((err) => {
