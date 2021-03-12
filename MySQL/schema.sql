@@ -1,25 +1,42 @@
+-- Drop is employeesDB exists
 DROP DATABASE IF EXISTS employeesDB;
 
+--Create employees database
 CREATE DATABASE employeesDB;
-
 USE employeesDB;
 
+--Create department table
 CREATE TABLE department (
-    id INT NOT NULL AUTO_INCREMENT primary key,
-    dept_name VARCHAR(30)
+    id INT NOT NULL AUTO_INCREMENT,
+    --holds dept name
+    dept_name VARCHAR(30) NOT NULL,
+    PRIMARY KEY (id)
 );
 
+-- Creates roles table
 CREATE TABLE roles (
-    r_id INT NOT NULL AUTO_INCREMENT primary key,
-    role_name VARCHAR(30),
+    --roles id
+    roles_id INT NOT NULL AUTO_INCREMENT,
+    --holds role title
+    role_title VARCHAR(30) NOT NULL,
+    --holds role salary 
     role_salary DECIMAL(9,2),
-    department_id INT
+    --holds reference to department role belongs to
+    department_id INT,
+    PRIMARY KEY (r_id)
 );
 
+--Creates employee table
 CREATE TABLE employee {
-    empl_id INT NOT NULL AUTO_INCREMENT primary key,
-    first_name VARCHAR(30),
-    last_name VARCHAR(30),
+    -- id
+    id INT NOT NULL AUTO_INCREMENT,
+    -- holds employee first name
+    first_name VARCHAR(30) NOT NULL,
+    -- holds employees last name
+    last_name VARCHAR(30) NOT NULL,
+    -- holds reference to role employee has
     role_id INT,
-    manager_id INT
+    --  holds reference to another employee that manages the employee being Created
+    manager_id INT,
+    PRIMARY KEY (empl_id)
 };
