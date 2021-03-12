@@ -1,22 +1,31 @@
 //require
-//const mysql = require('mysql');
+const mysql = require('mysql');
 const inquirer = require('inquirer');
+const cTable = require('console.table');
 
 
 //connection information for the sql database
-//const connection = mysql.createConnection({
-    //host: 'localhost',
+const connection = mysql.createConnection({
+    host: 'localhost',
 
     // Your port; if not 3306
-    //port: 3306,
+    port: 3306,
   
     // Your username
-    //user: 'root',
+    user: 'root',
   
     // Your password
-    //password: '',
-    //database: 'employeesDB',
-  //});
+    password: 'Shadow12!',
+    database: 'employeesDB',
+  });
+
+
+// connect to the mysql server and sql database
+connection.connect((err) => {
+    if (err) throw err;
+    //run the start function after the connection is made to prompt the user
+    start();
+  });
 
 const init = () => {
     console.log("Welcome to Chico's Place!!!");
@@ -47,9 +56,9 @@ const start = () => {
             "Exit App"
         ]
     })
-    .then((response) => {
-        console.log(response);
-        switch (response.action) {
+    .then((answer) => {
+        console.log(answer);
+        switch (answer.action) {
             case 'Add New Department':
                 addDepartment();
                 break;
@@ -91,13 +100,13 @@ const start = () => {
                 connection.end();
                 break;
         }
-    })
+    });
 }
 
 
 
 const getDept = () => {
-    
+ 
 }
 
 const getRoles = () => {
@@ -109,8 +118,40 @@ const addDepartment = () => {
 }
 
 const viewEmployeeDept = () => {
+    connection.query(`SELECT * FROM department`, (err, res) => {
+    inquirer
+     .prompt({
+         name: 'allDepartment',
+         type: 'list',
+         message: 'Which department would you like to view?',
+         choices() {
+             const deptArray = [];
+             res.forEach(({ dept_name }) => {
+                 deptArray.push(dept_name);
+             });
+             return deptArray;
+         },
+     }).then((answer) => {
+         let query = 
+            'SELECT department.dept_name, roles.title, roles.salary, employee.first_name, employee.last_name ' +
+            'FROM department ' +
+            'INNER JOIN roles ON (department.id = roles.department_id) ' +
+            'INNER JOIN employee ON (roles.roles_id = employee.role_id) ' +
+            'WHERE (department.dept_name = ?)';
+        connection.query(query, [answer.allDepartment], (err, res) => {
+            if (err) throw err
+            console.log(`${res.length} matches found!`);
+            console.log('Viewing Employees By Department');
+            console.table(res);
+            start();
+            }
+        );
 
-}
+     });
+
+    });
+};
+    
 
 const viewEmployeeRoles = () => {
 
@@ -140,20 +181,10 @@ const deleteEmployee = () => {
     
 }
 
-const deleteEmployee = () => {
-    
-}
-
 const deleteRole = () => {
 
 }
 
 init();
 
-// connect to the mysql server and sql database
-//connection.connect((err) => {
-   // if (err) throw err;
-    // run the start function after the connection is made to prompt the user
-    //start();
-  //});
   
