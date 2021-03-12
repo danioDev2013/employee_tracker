@@ -18,9 +18,9 @@ CREATE TABLE roles (
     --roles id
     roles_id INT NOT NULL AUTO_INCREMENT,
     --holds role title
-    role_title VARCHAR(30) NOT NULL,
+    title VARCHAR(30) NOT NULL,
     --holds role salary 
-    role_salary DECIMAL(9,2),
+    salary DECIMAL(9,2),
     --holds reference to department role belongs to
     department_id INT,
     PRIMARY KEY (r_id)
