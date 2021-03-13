@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
     user: 'root',
   
     // Your password
-    password: 'Shadow12!',
+    password: '',
     database: 'employeesDB',
   });
 
@@ -168,6 +168,7 @@ const viewEmployee = () => {
         if (err) throw err
         console.log('Viewing All Employees');
         console.table(res);
+        start();
     })
 }
 
