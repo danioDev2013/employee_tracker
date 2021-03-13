@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
     user: 'root',
   
     // Your password
-    password: '',
+    password: 'Shadow12!',
     database: 'employeesDB',
   });
 
@@ -117,6 +117,7 @@ const addDepartment = () => {
     
 }
 
+// View all employees by department 
 const viewEmployeeDept = () => {
     connection.query(`SELECT * FROM department`, (err, res) => {
     inquirer
@@ -157,8 +158,17 @@ const viewEmployeeRoles = () => {
 
 }
 
+//view all employees
 const viewEmployee = () => {
-    
+    let query =
+      'SELECT * ' + 'FROM employee ' + 
+      'INNER JOIN roles ON employee.role_id = roles.roles_id ' +
+      'INNER JOIN department ON roles.department_id = department.id;';
+    connection.query(query, (err, res) => {
+        if (err) throw err
+        console.log('Viewing All Employees');
+        console.table(res);
+    })
 }
 
 const updateRole = () => {
