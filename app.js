@@ -120,43 +120,74 @@ const addDepartment = () => {
 // View all employees by department 
 const viewEmployeeDept = () => {
     connection.query(`SELECT * FROM department`, (err, res) => {
-    inquirer
-     .prompt({
-         name: 'allDepartment',
-         type: 'list',
-         message: 'Which department would you like to view?',
-         choices() {
-             const deptArray = [];
-             res.forEach(({ dept_name }) => {
-                 deptArray.push(dept_name);
-             });
-             return deptArray;
-         },
-     }).then((answer) => {
-         let query = 
-            'SELECT department.dept_name, roles.title, roles.salary, employee.first_name, employee.last_name ' +
-            'FROM department ' +
-            'INNER JOIN roles ON (department.id = roles.department_id) ' +
-            'INNER JOIN employee ON (roles.roles_id = employee.role_id) ' +
-            'WHERE (department.dept_name = ?)';
-        connection.query(query, [answer.allDepartment], (err, res) => {
-            if (err) throw err
-            console.log(`${res.length} matches found!`);
-            console.log('Viewing Employees By Department');
-            console.table(res);
-            start();
-            }
-        );
+        inquirer
+          .prompt({
+            name: 'allDepartment',
+            type: 'list',
+            message: 'Which department would you like to view?',
+            choices() {
+                const deptArray = [];
+                res.forEach(({ dept_name }) => {
+                    deptArray.push(dept_name);
+                });
+                return deptArray;
+            },
+        }).then((answer) => {
+            let query = 
+                'SELECT department.dept_name, roles.title, roles.salary, employee.first_name, employee.last_name ' +
+                'FROM department ' +
+                'INNER JOIN roles ON (department.id = roles.department_id) ' +
+                'INNER JOIN employee ON (roles.roles_id = employee.role_id) ' +
+                'WHERE (department.dept_name = ?)';
+            connection.query(query, [answer.allDepartment], (err, res) => {
+                if (err) throw err
+                console.log(`${res.length} matches found!`);
+                console.log('Viewing Employees By Department');
+                console.table(res);
+                start();
+                }
+            );
 
-     });
+        });
 
     });
 };
-    
 
+//View all employees by roles
 const viewEmployeeRoles = () => {
+    connection.query(`SELECT * FROM roles`, (err, res) => {
+        inquirer
+          .prompt({
+            name: 'allRoles',
+            type: 'list',
+            message: 'Which Roles would you like to view?',
+            choices() {
+                const roleArray = [];
+                res.forEach(({ title }) => {
+                    roleArray.push(title);
+                });
+                return roleArray;
+            },
+        }).then((answer) => {
+            let query = 
+                'SELECT roles.title, roles.salary, employee.first_name, employee.last_name, department.dept_name ' +
+                'FROM roles ' +
+                'INNER JOIN employee ON (employee.role_id = roles.roles_id) ' +
+                'INNER JOIN department ON (roles.department_id = department.id) ' +
+                'WHERE (roles.title = ?);';
+            connection.query(query, [answer.allRoles], (err, res) => {
+                if (err) throw err
+                console.log(`${res.length} matches found!`);
+                console.log('Viewing Employees By Roles');
+                console.table(res);
+                start();
+                }
+            );
 
-}
+        });
+
+    });
+};
 
 //view all employees
 const viewEmployee = () => {
