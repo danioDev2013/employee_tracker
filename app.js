@@ -397,7 +397,7 @@ const updateRole = () => {
             
 
               let query = 
-                'UPDATE roles SET title = ? WHERE roles_id = ?';
+                'UPDATE roles SET title = ? WHERE roles_id = ?;';
               connection.query(query, [newRole, idRole], (err, res) => {
                   if (err) throw err
                   console.log('Role Updated!');
