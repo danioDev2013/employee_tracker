@@ -55,8 +55,22 @@ npm i
 - Once you are complete, select `exit app`.
 
 
-🚀 Demo:
+🚀 Demos:
+Below are different gifs showing you some of the featured questions.
+<img src="assets/images/start.gif" width="100%" alt="Demo"/>
+<br>
+<br>
+<img src="assets/images/two.gif" width="100%" alt="Demo"/>
+<br>
+<br>
+<img src="assets/images/three.gif" width="100%" alt="Demo"/>
+<br>
+<br>
+<img src="assets/images/four.gif" width="100%" alt="Demo"/>
 
+View the full demo on youtube, click on the link below. <br>
+<br>
+[My Youtube Demo!](https://youtu.be/IMNM5J1vrWU)
 
 ## License
 
